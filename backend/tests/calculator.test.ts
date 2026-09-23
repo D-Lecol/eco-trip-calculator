@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import calculatorService from '../src/calculatorService.js';
+import {describe, expect, it} from 'vitest';
+import calculatorService, {Co2Labels} from '../src/calculatorService.js';
+import {BikeTrip} from "../src/models/BikeTrip";
 
 describe('Calculator Service', () => {
   describe('Bike transport', () => {
@@ -17,6 +18,16 @@ describe('Calculator Service', () => {
       expect(result.label).toBe('GREEN');
     });
   });
+
+  describe('New Bike transport', () => {
+    it('should return 0 CO2 for bike trips', () => {
+      const bikeTrip = new BikeTrip(10)
+      const result = calculatorService.newCalculate(bikeTrip);
+
+      expect(result.co2).toBe(0);
+      expect(result.label).toBe(Co2Labels.GREEN);
+    })
+  })
 
   describe('Car transport with thermal engine', () => {
     it('should calculate CO2 for thermal car with 1 passenger', () => {

@@ -1,4 +1,11 @@
+import {Trip} from "./interfaces/Trip";
+
 class CalculatorService {
+  newCalculate(trip: Trip){
+    const result = trip.calculateCo2()
+    return {co2: trip.calculateCo2(), label: this._getLabel(result)}
+  }
+
   calculate(d: any, t: any, ct: any, p: any, c: any): any {
     var result = 0;
     var lbl = '';
@@ -63,13 +70,19 @@ class CalculatorService {
 
   _getLabel(result: number): string {
     if (result < 5) {
-      return 'GREEN';
-    } else if (result >= 5 && result < 15) {
-      return 'ORANGE';
-    } else {
-      return 'RED';
+      return Co2Labels.GREEN;
     }
+    if (result >= 5 && result < 15) {
+      return Co2Labels.ORANGE;
+    }
+    return Co2Labels.RED;
   }
+}
+
+export enum Co2Labels {
+  GREEN = 'GREEN',
+  ORANGE = 'ORANGE',
+  RED = 'RED',
 }
 
 export default new CalculatorService();
