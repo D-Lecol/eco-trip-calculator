@@ -1,28 +1,22 @@
 import {describe, expect, it} from 'vitest';
 import calculatorService, {Co2Labels} from '../src/calculatorService.js';
 import {BikeTrip} from "../src/models/BikeTrip";
+import {WalkTrip} from "./WalkTrip";
+import {ThermalCarTrip} from "../src/models/ThermalCarTrip";
 
 describe('Calculator Service', () => {
-  describe('Bike transport', () => {
-    it('should return 0 CO2 for bike trips', () => {
-      const result = calculatorService.calculate(10, 'bike', null, 1, null);
-
-      expect(result.co2).toBe(0);
-      expect(result.label).toBe('GREEN');
-    });
-
-    it('should return 0 CO2 for walking', () => {
-      const result = calculatorService.calculate(5, 'walk', null, 1, null);
-
-      expect(result.co2).toBe(0);
-      expect(result.label).toBe('GREEN');
-    });
-  });
-
   describe('New Bike transport', () => {
     it('should return 0 CO2 for bike trips', () => {
       const bikeTrip = new BikeTrip(10)
       const result = calculatorService.newCalculate(bikeTrip);
+
+      expect(result.co2).toBe(0);
+      expect(result.label).toBe(Co2Labels.GREEN);
+    });
+
+    it('should return 0 CO2 for walking', () => {
+      const walkTrip = new WalkTrip(10)
+      const result = calculatorService.newCalculate(walkTrip);
 
       expect(result.co2).toBe(0);
       expect(result.label).toBe(Co2Labels.GREEN);
@@ -31,17 +25,19 @@ describe('Calculator Service', () => {
 
   describe('Car transport with thermal engine', () => {
     it('should calculate CO2 for thermal car with 1 passenger', () => {
-      const result = calculatorService.calculate(100, 'car', 'thermal', 1, 'France');
+      const thermalCarTrip = new ThermalCarTrip(100, 1, 'France')
+      const newResult = calculatorService.newCalculate(thermalCarTrip);
 
-      expect(result.co2).toBe(19.2);
-      expect(result.label).toBe('RED');
+      expect(newResult.co2).toBe(19.2);
+      expect(newResult.label).toBe(Co2Labels.RED);
     });
 
     it('should divide CO2 by number of passengers', () => {
-      const result = calculatorService.calculate(100, 'car', 'thermal', 4, 'France');
+      const thermalCarTrip = new ThermalCarTrip(100, 4, 'France')
+      const newResult = calculatorService.newCalculate(thermalCarTrip);
 
-      expect(result.co2).toBe(4.8);
-      expect(result.label).toBe('GREEN');
+      expect(newResult.co2).toBe(4.8);
+      expect(newResult.label).toBe(Co2Labels.GREEN);
     });
   });
 
