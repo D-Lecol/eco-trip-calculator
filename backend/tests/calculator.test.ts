@@ -3,6 +3,8 @@ import calculatorService, {Co2Labels} from '../src/calculatorService.js';
 import {BikeTrip} from "../src/models/BikeTrip";
 import {WalkTrip} from "./WalkTrip";
 import {ThermalCarTrip} from "../src/models/ThermalCarTrip";
+import {ElectricCarTrip} from "../src/models/ElectricCarTrip";
+import {Countries} from "../src/enums/Countries";
 
 describe('Calculator Service', () => {
   describe('New Bike transport', () => {
@@ -25,7 +27,7 @@ describe('Calculator Service', () => {
 
   describe('Car transport with thermal engine', () => {
     it('should calculate CO2 for thermal car with 1 passenger', () => {
-      const thermalCarTrip = new ThermalCarTrip(100, 1, 'France')
+      const thermalCarTrip = new ThermalCarTrip(100, 1, Countries.FRANCE)
       const newResult = calculatorService.newCalculate(thermalCarTrip);
 
       expect(newResult.co2).toBe(19.2);
@@ -33,7 +35,7 @@ describe('Calculator Service', () => {
     });
 
     it('should divide CO2 by number of passengers', () => {
-      const thermalCarTrip = new ThermalCarTrip(100, 4, 'France')
+      const thermalCarTrip = new ThermalCarTrip(100, 4, Countries.FRANCE)
       const newResult = calculatorService.newCalculate(thermalCarTrip);
 
       expect(newResult.co2).toBe(4.8);
@@ -43,17 +45,19 @@ describe('Calculator Service', () => {
 
   describe('Car transport with electric engine', () => {
     it('should calculate lower CO2 for electric car in France', () => {
-      const result = calculatorService.calculate(100, 'car', 'electric', 1, 'France');
+      const electricCarTrip = new ElectricCarTrip(100, 1, Countries.FRANCE)
+      const newResult = calculatorService.newCalculate(electricCarTrip);
 
-      expect(result.co2).toBe(1.2);
-      expect(result.label).toBe('GREEN');
+      expect(newResult.co2).toBe(1.2);
+      expect(newResult.label).toBe(Co2Labels.GREEN);
     });
 
     it('should calculate higher CO2 for electric car in Poland', () => {
-      const result = calculatorService.calculate(100, 'car', 'electric', 1, 'Poland');
+      const electricCarTrip = new ElectricCarTrip(100, 1, Countries.POLAND)
+      const newResult = calculatorService.newCalculate(electricCarTrip);
 
-      expect(result.co2).toBe(7.8);
-      expect(result.label).toBe('ORANGE');
+      expect(newResult.co2).toBe(7.8);
+      expect(newResult.label).toBe(Co2Labels.ORANGE);
     });
   });
 
