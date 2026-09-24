@@ -4,7 +4,6 @@ export class ThermalCarTrip implements CarTrip {
     constructor(
         private readonly distance: number,
         private readonly passengers: number,
-        private readonly country: string
     ) {}
 
 

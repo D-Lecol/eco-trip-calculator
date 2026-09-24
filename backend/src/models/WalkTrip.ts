@@ -1,7 +1,7 @@
-import {Trip} from "../src/interfaces/Trip";
+import {Trip} from "../interfaces/Trip";
 
 export class WalkTrip implements Trip {
-    constructor(private distance: number) {
+    constructor() {
     }
 
     calculateCo2(): number {

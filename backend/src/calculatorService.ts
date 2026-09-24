@@ -58,16 +58,22 @@ class CalculatorService {
 
   _calculateTrain(d: any, c: any): number {
     var result = 0;
-    if (c === 'France') {
-      result = d * 0.0032;
-    } else if (c === 'Germany') {
-      result = d * 0.032;
-    } else if (c === 'Poland') {
-      result = d * 0.069;
-    } else if (c === 'Norway') {
-      result = d * 0.001;
-    } else {
-      result = d * 0.041;
+    switch (c) {
+      case 'France':
+        result = d * 0.0032;
+        break;
+      case 'Germany':
+        result = d * 0.032;
+        break;
+      case 'Poland':
+        result = d * 0.069;
+        break;
+      case 'Norway':
+        result = d * 0.001;
+        break;
+      default:
+        result = d * 0.041;
+        break;
     }
     return result;
   }
