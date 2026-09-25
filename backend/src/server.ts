@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import calculatorService from './calculatorService.js';
 import compareService from './compareService.js';
 import historyService from './historyService.js';
+import {TripFactory} from "./factories/TripFactory";
 import {pathToFileURL} from "node:url";
 
 const app = express();
@@ -13,7 +14,8 @@ app.use(bodyParser.json());
 
 app.post('/api/calculate', (req: any, res: any) => {
   const { distance, transport, carType, passengers, country } = req.body;
-
+  const createdTrip = TripFactory.createFromDto(req.body)
+  const newResult = calculatorService.newCalculate(createdTrip)
   const result = calculatorService.calculate(
     distance,
     transport,
@@ -22,22 +24,18 @@ app.post('/api/calculate', (req: any, res: any) => {
     country
   );
 
-  const trip = historyService.addTrip({
-    distance,
-    transport,
-    carType,
-    passengers,
-    country,
-    co2: result.co2,
-    label: result.label
-  });
+  const newTrip = historyService.addTrip({
+    createdTrip,
+    co2: newResult.co2,
+    label: newResult.label
+  })
 
   res.json({
     success: true,
     data: {
-      co2: result.co2,
-      label: result.label,
-      id: trip.id
+      co2: newResult.co2,
+      label: newResult.label,
+      id: newTrip.id
     }
   });
 });

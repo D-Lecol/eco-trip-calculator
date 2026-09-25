@@ -1,7 +1,8 @@
 import {Trip} from "../interfaces/Trip";
 import {Countries} from "../enums/Countries";
+import {CarTrip} from "../interfaces/CarTrip";
 
-export class ElectricCarTrip implements Trip {
+export class ElectricCarTrip implements CarTrip {
     constructor(
         private readonly distance: number,
         private readonly passengers: number,

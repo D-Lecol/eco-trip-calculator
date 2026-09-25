@@ -73,7 +73,7 @@ describe('EcoTrip API', () => {
 
       const history = historyService.getAll();
       expect(history.length).toBe(1);
-      expect(history[0].distance).toBe(50);
+      expect(history[0].distance).toBe(50); //TODO refactor la partie gestion de l'histoire mais surtout revoir la POO de qu'est ce qu'un Trip
       expect(history[0].transport).toBe('train');
     });
   });
