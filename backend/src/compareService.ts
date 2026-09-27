@@ -1,28 +1,37 @@
 import calculatorService from './calculatorService.js';
 import {Trip} from "./models/Trip";
+import {CompareReport} from "./interfaces/CompareReport.js";
+import {Co2Report} from "./models/Co2Report.js";
 
 class CompareService {
-    compare(trip1: Trip, trip2: Trip): any {
-        const r1 = calculatorService.calculate(trip1);
+    compare(trip1: Trip, trip2: Trip): CompareReport {
+        const co2Report1 = calculatorService.calculate(trip1);
 
-        const r2 = calculatorService.calculate(trip2);
+        const co2Report2 = calculatorService.calculate(trip2);
 
-        var winner = '';
-        if (r1.co2 < r2.co2) {
-            winner = 'trip1';
-        } else if (r2.co2 < r1.co2) {
-            winner = 'trip2';
-        } else {
-            winner = 'equal';
-        }
+        let winner: string;
+
+        winner = co2Report1.co2 < co2Report2.co2 ? Winner.TRIP1
+            : co2Report2.co2 < co2Report1.co2 ? Winner.TRIP2
+                : Winner.EQUAL;
 
         return {
-            trip1: {co2: r1.co2, label: r1.label},
-            trip2: {co2: r2.co2, label: r2.label},
+            trip1: co2Report1,
+            trip2: co2Report2,
             winner: winner,
-            difference: Math.abs(r1.co2 - r2.co2)
+            difference: this.getDifference(co2Report1, co2Report2)
         };
     }
+
+    private getDifference(co2Report1: Co2Report, co2Report2: Co2Report): number {
+        return Math.abs(co2Report1.co2 - co2Report2.co2)
+    }
+}
+
+enum Winner {
+    TRIP1 = 'trip1',
+    TRIP2 = 'trip2',
+    EQUAL = 'equal',
 }
 
 export default new CompareService();
