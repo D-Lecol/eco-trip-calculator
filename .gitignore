@@ -32,3 +32,6 @@ Thumbs.db
 # Temporary files
 *.tmp
 .repository-analysis/
+
+# Bun
+bun.lock
