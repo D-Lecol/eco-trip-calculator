@@ -11,10 +11,10 @@ class CompareService {
 
         let winner: string;
 
-        winner = co2Report1.co2 < co2Report2.co2 ? Winner.TRIP1
-            : co2Report2.co2 < co2Report1.co2 ? Winner.TRIP2
-                : Winner.EQUAL;
-
+        if (co2Report1.co2 < co2Report2.co2) winner = Winner.TRIP1
+        else if (co2Report2.co2 < co2Report1.co2) winner = Winner.TRIP2
+        else winner = Winner.EQUAL
+        
         return {
             trip1: co2Report1,
             trip2: co2Report2,

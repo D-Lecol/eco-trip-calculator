@@ -11,6 +11,7 @@ import {TripDto} from "./DTOs/TripDto.js";
 import {CompareTripsDto} from "./DTOs/CompareTripsDto.js";
 
 const app = express();
+app.disable("x-powered-by");
 app.use(cors());
 app.use(bodyParser.json());
 

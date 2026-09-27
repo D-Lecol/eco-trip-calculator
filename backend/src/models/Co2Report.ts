@@ -8,8 +8,9 @@ export class Co2Report {
         let co2Report = new Co2Report();
         co2Report.co2 = co2;
 
-        co2Report.label = this.isGood(co2) ? Co2Labels.GREEN
-            : co2Report.label = this.isAcceptable(co2) ? Co2Labels.ORANGE : Co2Labels.RED;
+        if (this.isGood(co2)) co2Report.label = Co2Labels.GREEN
+        else if (this.isAcceptable(co2)) co2Report.label = Co2Labels.ORANGE
+        else co2Report.label = Co2Labels.RED
 
         return co2Report;
     }

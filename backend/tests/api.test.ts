@@ -74,7 +74,7 @@ describe('EcoTrip API', () => {
                 });
 
             const history = historyService.getAll();
-            expect(history.length).toBe(1);
+            expect(history).toHaveLength(1);
             expect(history[0].trip.distance).toBe(50);
             expect(history[0].trip.transport).toBeInstanceOf(Train)
         });
@@ -163,7 +163,7 @@ describe('EcoTrip API', () => {
 
             expect(response.status).toBe(200);
             expect(response.body.count).toBe(2);
-            expect(response.body.data.length).toBe(2);
+            expect(response.body.data).toHaveLength(2);
         });
     });
 

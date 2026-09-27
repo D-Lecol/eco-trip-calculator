@@ -27,8 +27,8 @@ class HistoryService {
         let total = 0;
         let avg = 0;
 
-        for (let i = 0; i < this.data.length; i++) {
-            total = total + this.data[i].co2Report.co2;
+        for (const element of this.data) {
+            total = total + element.co2Report.co2;
         }
 
         if (this.data.length > 0) {
