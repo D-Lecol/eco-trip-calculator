@@ -1,23 +1,17 @@
-import {Trip} from "../models/Trip";
-import {Transport} from "../interfaces/Transport";
-import {TripDto} from "../DTOs/TripDto";
+import {Trip} from "../models/Trip.js";
+import {Transport} from "../interfaces/Transport.js";
 
 export class TripBuilder {
-    distance(distance: number): TransportStep{
+    distance(distance: number): TransportStep {
         const trip = new Trip();
         trip.distance = distance;
         return new Steps(trip)
     }
-
-    static fromDto(dto: TripDto){
-
-    }
 }
 
 class Steps
-    implements TransportStep
-{
-    constructor(private readonly trip: Trip){
+    implements TransportStep {
+    constructor(private readonly trip: Trip) {
 
     }
 
@@ -27,6 +21,6 @@ class Steps
     }
 }
 
-interface TransportStep{
+interface TransportStep {
     transport(transport: Transport): Trip;
 }

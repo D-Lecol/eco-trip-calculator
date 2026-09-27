@@ -1,24 +1,30 @@
-import {Transport} from "../interfaces/Transport";
-import {Bike} from "../models/transports/Bike";
-import {Walk} from "../models/transports/Walk";
-import {Car} from "../models/transports/Car";
+import {Transport} from "../interfaces/Transport.js";
+import {Bike} from "../models/transports/Bike.js";
+import {Walk} from "../models/transports/Walk.js";
+import {Bus} from "../models/transports/Bus.js";
+import {Car} from "../models/transports/Car.js";
+import {Train} from "../models/transports/Train.js";
 
 export class TransportBuilder {
 
-    bike(): Transport{
+    bike(): Transport {
         return new Bike();
     }
 
-    walk(): Transport{
+    walk(): Transport {
         return new Walk();
     }
 
-    bus(): Transport{
-        return new Bike();
+    bus(): Transport {
+        return new Bus();
     }
 
-    car(car: Car): Transport{
+    car(car: Car): Transport {
         return car;
+    }
+
+    train(train: Train): Transport {
+        return train;
     }
 }
 

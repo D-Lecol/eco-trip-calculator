@@ -1,8 +1,8 @@
-import {Transport} from "../../interfaces/Transport";
-import {Country} from "../../interfaces/Country";
-import {Transports} from "../../enums/Transports";
+import {Transport} from "../../interfaces/Transport.js";
+import {Transports} from "../../enums/Transports.js";
+import {Country} from "../../interfaces/Country.js";
 
-export class Train implements Transport{
+export class Train implements Transport {
     name: string = Transports.TRAIN;
     country: Country;
 

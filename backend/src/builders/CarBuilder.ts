@@ -1,8 +1,8 @@
-import {Car} from "../models/transports/Car";
-import {CarType} from "../interfaces/CarType";
+import {Car} from "../models/transports/Car.js";
+import {CarType} from "../interfaces/CarType.js";
 
 export class CarBuilder {
-    passengers(passengers: number): CarTypeStep{
+    passengers(passengers: number): CarTypeStep {
         const car = new Car();
         car.passengers = passengers;
         return new Steps(car)
@@ -10,7 +10,7 @@ export class CarBuilder {
 }
 
 class Steps implements CarTypeStep {
-    constructor(private readonly car: Car){
+    constructor(private readonly car: Car) {
 
     }
 
@@ -20,7 +20,7 @@ class Steps implements CarTypeStep {
     }
 }
 
-interface CarTypeStep{
+interface CarTypeStep {
     carType(carType: CarType): Car;
 }
 

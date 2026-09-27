@@ -1,46 +1,52 @@
+import {TripCo2Report} from "./interfaces/TripCo2Report.js";
+import {Co2Report} from "./models/Co2Report.js";
+import {Trip} from "./models/Trip.js";
+
+
 class HistoryService {
-  data: any[] = [];
-  counter: number = 0;
+    data: TripCo2Report[] = [];
+    counter: number = 0;
 
-  addTrip(tripData: any): any {
-    this.counter++;
-    const trip = {
-      id: this.counter,
-      ...tripData,
-      timestamp: new Date()
-    };
-    this.data.push(trip);
-    return trip;
-  }
-
-  getAll(): any[] {
-    return this.data;
-  }
-
-  getStats(): any {
-    var total = 0;
-    var avg = 0;
-
-    for (var i = 0; i < this.data.length; i++) {
-      total = total + this.data[i].co2;
+    addTrip(trip: Trip, co2Report: Co2Report): TripCo2Report {
+        this.counter++;
+        const tripCo2Report = {
+            id: this.counter,
+            trip,
+            co2Report,
+            timestamp: new Date()
+        };
+        this.data.push(tripCo2Report);
+        return tripCo2Report;
     }
 
-    if (this.data.length > 0) {
-      avg = total / this.data.length;
+    getAll(): TripCo2Report[] {
+        return this.data;
     }
 
-    return {
-      totalTrips: this.data.length,
-      totalCO2: total,
-      averageCO2: avg,
-      lastCalculation: this.data.length > 0 ? this.data[this.data.length - 1].timestamp : null
-    };
-  }
+    getStats(): any {
+        let total = 0;
+        let avg = 0;
 
-  clear(): void {
-    this.data = [];
-    this.counter = 0;
-  }
+        for (let i = 0; i < this.data.length; i++) {
+            total = total + this.data[i].co2Report.co2;
+        }
+
+        if (this.data.length > 0) {
+            avg = total / this.data.length;
+        }
+
+        return {
+            totalTrips: this.data.length,
+            totalCO2: total,
+            averageCO2: avg,
+            lastCalculation: this.data.length > 0 ? this.data[this.data.length - 1].timestamp : null
+        };
+    }
+
+    clear(): void {
+        this.data = [];
+        this.counter = 0;
+    }
 }
 
 export default new HistoryService();

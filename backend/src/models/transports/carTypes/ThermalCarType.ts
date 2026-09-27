@@ -1,7 +1,8 @@
-import {CarType} from "../../../interfaces/CarType";
-import {CarTypes} from "../../../enums/CarTypes";
+import {CarTypes} from "../../../enums/CarTypes.js";
+import {CarType} from "../../../interfaces/CarType.js";
 
-export class ThermalCarType implements CarType{
+
+export class ThermalCarType implements CarType {
     name: CarTypes.THERMAL;
 
     getCo2Emissions(): number {

@@ -1,7 +1,7 @@
-import {Country} from "../../interfaces/Country";
-import {Countries} from "../../enums/Countries";
+import {Country} from "../../interfaces/Country.js";
+import {Countries} from "../../enums/Countries.js";
 
-export class Poland implements Country{
+export class Poland implements Country {
     name: string = Countries.POLAND;
 
     getElectricCarCo2PerKm(): number {

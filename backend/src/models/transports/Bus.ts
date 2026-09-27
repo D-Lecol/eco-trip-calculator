@@ -1,7 +1,7 @@
-import {Transport} from "../../interfaces/Transport";
-import {Transports} from "../../enums/Transports";
+import {Transport} from "../../interfaces/Transport.js";
+import {Transports} from "../../enums/Transports.js";
 
-export class Bus implements Transport{
+export class Bus implements Transport {
     name: string = Transports.BUS;
 
     getCo2EmissionsPerKm(): number {
