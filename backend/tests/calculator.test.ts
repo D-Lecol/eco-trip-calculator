@@ -7,11 +7,19 @@ import {ElectricCarTrip} from "../src/models/ElectricCarTrip";
 import {Countries} from "../src/enums/Countries";
 import {TrainTrip} from "../src/models/TrainTrip";
 import {BusTrip} from "../src/models/BusTrip";
+import {TripBuilder} from "../src/builders/TripBuilder";
+import {Transports} from "../src/enums/Transports";
+import {TransportBuilder} from "../src/builders/TransportBuilder";
+import {CarBuilder} from "../src/builders/CarBuilder";
+import {ThermalCarType} from "../src/models/transports/carTypes/ThermalCarType";
 
 describe('Calculator Service', () => {
   describe('New Bike transport', () => {
     it('should return 0 CO2 for bike trips', () => {
-      const bikeTrip = new BikeTrip()
+      const bikeTrip = new TripBuilder()
+          .distance(0)
+          .transport(new TransportBuilder().bike())
+
       const result = calculatorService.newCalculate(bikeTrip);
 
       expect(result.co2).toBe(0);
@@ -19,7 +27,10 @@ describe('Calculator Service', () => {
     });
 
     it('should return 0 CO2 for walking', () => {
-      const walkTrip = new WalkTrip()
+      const walkTrip = new TripBuilder()
+          .distance(O)
+          .transport(new TransportBuilder().bike())
+
       const result = calculatorService.newCalculate(walkTrip);
 
       expect(result.co2).toBe(0);
@@ -29,7 +40,15 @@ describe('Calculator Service', () => {
 
   describe('Car transport with thermal engine', () => {
     it('should calculate CO2 for thermal car with 1 passenger', () => {
-      const thermalCarTrip = new ThermalCarTrip(100, 1)
+      const thermalCarTrip = new TripBuilder()
+          .distance(100)
+          .transport(new TransportBuilder()
+              .car(new CarBuilder()
+                  .passengers(1)
+                  .carType(new ThermalCarType())
+              )
+          )
+
       const newResult = calculatorService.newCalculate(thermalCarTrip);
 
       expect(newResult.co2).toBe(19.2);

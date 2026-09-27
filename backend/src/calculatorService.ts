@@ -1,4 +1,4 @@
-import {Trip} from "./interfaces/Trip";
+import {Trip} from "./models/Trip";
 
 class CalculatorService {
   newCalculate(trip: Trip){

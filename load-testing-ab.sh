@@ -152,7 +152,7 @@ cat > "${TEMP_DIR}/error_zero_passengers.json" << 'EOF'
 }
 EOF
 
-# Erreur 8: CarType invalide
+# Erreur 8: CarTypes invalide
 cat > "${TEMP_DIR}/error_invalid_cartype.json" << 'EOF'
 {
   "distance": 100,
@@ -311,7 +311,7 @@ ab -n ${ERROR_REQUESTS} -c ${ERROR_CONCURRENCY} \
    "${BASE_URL}/api/calculate" 2>&1 | tee "${TEMP_DIR}/result_e7.txt"
 echo ""
 
-# Test E8: CarType invalide
+# Test E8: CarTypes invalide
 echo -e "${BLUE}═══════════════════════════════════════════════════════${NC}"
 echo -e "${YELLOW}⚠️  Test E8: CarType invalide${NC}"
 echo -e "${BLUE}═══════════════════════════════════════════════════════${NC}"

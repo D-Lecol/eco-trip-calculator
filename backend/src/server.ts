@@ -7,22 +7,15 @@ import compareService from './compareService.js';
 import historyService from './historyService.js';
 import {TripFactory} from "./factories/TripFactory";
 import {pathToFileURL} from "node:url";
+import {TripDto} from "./DTOs/TripDto";
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/api/calculate', (req: any, res: any) => {
-  const { distance, transport, carType, passengers, country } = req.body;
-  const createdTrip = TripFactory.createFromDto(req.body)
+  const createdTrip = TripFactory.createFromDto(req.body as TripDto)
   const newResult = calculatorService.newCalculate(createdTrip)
-  const result = calculatorService.calculate(
-    distance,
-    transport,
-    carType,
-    passengers,
-    country
-  );
 
   const newTrip = historyService.addTrip({
     createdTrip,

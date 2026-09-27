@@ -1,11 +1,12 @@
 import {Transport} from "../../interfaces/Transport";
 import {Country} from "../../interfaces/Country";
+import {Transports} from "../../enums/Transports";
 
 export class Train implements Transport{
-    name: string;
+    name: string = Transports.TRAIN;
     country: Country;
 
     getCo2EmissionsPerKm(): number {
-        return 0;
+        return this.country.getTrainCo2Percent();
     }
 }
